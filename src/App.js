@@ -7,6 +7,7 @@ function App() {
   const [contadorAntigo, setContadorAntigo] = useState(0);
   const [operacaoMult10, setOperacaoMult10] = useState(false);
   const [operadorPar, setOperadorPar] = useState(false);
+  const [operadorPrimo, setOperadorPrimo] = useState(false);
 
   const handleContadorMais = () => {
     setContadorAntigo(contador)
@@ -17,22 +18,31 @@ function App() {
     setContador(contador - 1)
   }
 
+  const numeroPrimo = (num) => {
+    for (let i = 2; i < num; i++)
+    if (num % i === 0) {
+      return false;
+    }
+    return num > 1;
+  }
+
   useEffect(() => {
     setOperadorPar(contador % 2 == 0);
     setOperacaoMult10(contador % 10 == 0);
+    setOperadorPrimo(numeroPrimo(contador));
   }, [contador])
 
   return (
     <div className="container mt-5">
-      <div class="card text-center mb-3">
-        <div class="card-header">
+      <div className="card text-center mb-3">
+        <div className="card-header">
           <h1>Contador</h1>
         </div>
-        <div class="row mt-2">
-          <div class="col">
+        <div className="row mt-2">
+          <div className="col">
             <h2>Antigo: {contadorAntigo}</h2>
           </div>
-          <div class="col">
+          <div className="col">
             <h2>Atual:
               <span className={operadorPar ? "text-success" : "text-danger"}> {contador}
               </span>
@@ -40,16 +50,16 @@ function App() {
           </div>
         </div>
       </div>
-      <div class="card text-center mb-3">
+      <div className="card text-center mb-3">
         {operadorPar ? "Esse número é par" : "Esse número é impar"}
       </div>
         {operacaoMult10 ? 
-        <div class="card text-center mb-3">Esse número é múltiplo de 10</div>
-         : null
+        <div className="card text-center mb-3">Esse número é múltiplo de 10</div> : null
         }
+        {operadorPrimo ? <div class="card text-center mb-3">É primo</div> : null}
       <div class="text-center">
-      <button class="btn btn-primary px-3" onClick={handleContadorMenos}> - </button>
-      <button class="btn btn-primary px-3 ms-3" onClick={handleContadorMais}> + </button>
+      <button className="btn btn-primary px-3" onClick={handleContadorMenos}> - </button>
+      <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMais}> + </button>
       </div>
     </div>
   );
