@@ -4,19 +4,20 @@ import {useState, useEffect} from 'react'
 
 function App() {
   const [contador, setContador] = useState(0);
-  const [contadorAntigo, setContadorAntigo] = useState(0);
+  const [ultimosContadores, setUltimosContadores] = useState([0, 0, 0, 0, 0]);
   const [operacaoMult10, setOperacaoMult10] = useState(false);
   const [operadorPar, setOperadorPar] = useState(false);
   const [operadorPrimo, setOperadorPrimo] = useState(false);
 
   const handleContadorMais = () => {
-    setContadorAntigo(contador)
-    setContador(contador + 1)
-  }
+    setUltimosContadores((prev) => [contador, ...prev.slice(0, 4)]);
+    setContador((prev) => prev + 1);
+  };
+
   const handleContadorMenos = () => {
-    setContadorAntigo(contador)
-    setContador(contador - 1)
-  }
+    setUltimosContadores((prev) => [contador, ...prev.slice(0, 4)]);
+    setContador((prev) => prev - 1);
+  };
 
   const numeroPrimo = (num) => {
     for (let i = 2; i < num; i++)
@@ -40,7 +41,7 @@ function App() {
         </div>
         <div className="row mt-2">
           <div className="col">
-            <h2>Antigo: {contadorAntigo}</h2>
+            <h2>Antigo: {contador - 1}</h2>
           </div>
           <div className="col">
             <h2>Atual:
@@ -56,10 +57,18 @@ function App() {
         {operacaoMult10 ? 
         <div className="card text-center mb-3">Esse número é múltiplo de 10</div> : null
         }
-        {operadorPrimo ? <div class="card text-center mb-3">É primo</div> : null}
-      <div class="text-center">
-      <button className="btn btn-primary px-3" onClick={handleContadorMenos}> - </button>
+        {operadorPrimo ? <div className="card text-center mb-3">É primo</div> : null}
+      <div className="text-center">
       <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMais}> + </button>
+      <button className="btn btn-primary px-3" onClick={handleContadorMenos}> - </button>
+      <div>
+      <h3>Últimos 5 números:</h3>
+        <ul>
+          {ultimosContadores.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      </div>
       </div>
     </div>
   );
