@@ -51,21 +51,21 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="card text-center mb-3">
+      <div className="card text-center mb-3 fs-4">
         {operadorPar ? "Esse número é par" : "Esse número é impar"}
       </div>
         {operacaoMult10 ? 
-        <div className="card text-center mb-3">Esse número é múltiplo de 10</div> : null
+        <div className="card text-center mb-3 fs-4">Esse número é múltiplo de 10</div> : null
         }
-        {operadorPrimo ? <div className="card text-center mb-3">É primo</div> : null}
+        {operadorPrimo ? <div className="card text-center mb-3 fs-4">É primo</div> : null}
       <div className="text-center">
-      <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMais}> + </button>
-      <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMenos}> - </button>
+        <button className=" btn btn-primary px-3 ms-3" onClick={handleContadorMais}>+</button>
+        <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMenos}>-</button>
       <div className="card text-center mb-3 mt-3">
       <h3 className="mt-2">Últimos 5 números:</h3>
-        <ul>
+        <ul class="list-group list-group-flush">
           {ultimosContadores.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li class="list-group-item fs-4" key={index}>{item}</li>
           ))}
         </ul>
       </div>
