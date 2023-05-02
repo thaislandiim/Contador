@@ -60,9 +60,9 @@ function App() {
         {operadorPrimo ? <div className="card text-center mb-3">É primo</div> : null}
       <div className="text-center">
       <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMais}> + </button>
-      <button className="btn btn-primary px-3" onClick={handleContadorMenos}> - </button>
-      <div>
-      <h3>Últimos 5 números:</h3>
+      <button className="btn btn-primary px-3 ms-3" onClick={handleContadorMenos}> - </button>
+      <div className="card text-center mb-3 mt-3">
+      <h3 className="mt-2">Últimos 5 números:</h3>
         <ul>
           {ultimosContadores.map((item, index) => (
             <li key={index}>{item}</li>
